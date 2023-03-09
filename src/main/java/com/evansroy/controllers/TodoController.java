@@ -2,54 +2,41 @@ package com.evansroy.controllers;
 
 import com.evansroy.models.Todo;
 import com.evansroy.services.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/todos")
 public class TodoController {
+    private final TodoService service;
 
-    @Autowired
-    private TodoService todoService;
+    public TodoController(TodoService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<Todo> getAllTodos(@RequestParam(required = false) Boolean completed) {
-        return todoService.getAllTodos(completed);
+    public List<Todo> getAllTodos() {
+        return service.getAllTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Todo> getTodoById(@PathVariable Long id) {
-        Optional<Todo> todo = todoService.getTodoById(id);
-        if (todo.isPresent()) {
-            return ResponseEntity.ok(todo.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Todo getTodoById(@PathVariable Long id) {
+        return service.getTodoById(id);
     }
 
     @PostMapping
     public Todo createTodo(@RequestBody Todo todo) {
-        return todoService.createTodo(todo);
+        return service.createTodo(todo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody Todo todo) {
-        Optional<Todo> updatedTodo = todoService.updateTodo(id, todo);
-        if (updatedTodo.isPresent()) {
-            return ResponseEntity.ok(updatedTodo.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Todo updateTodoById(@PathVariable Long id, @RequestBody Todo updatedTodo) {
+        return service.updateTodoById(id, updatedTodo);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTodoById(@PathVariable Long id) {
-        todoService.deleteTodoById(id);
-        return ResponseEntity.noContent().build();
+    public void deleteTodoById(@PathVariable Long id) {
+        service.deleteTodoById(id);
     }
-
 }

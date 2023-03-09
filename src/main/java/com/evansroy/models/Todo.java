@@ -13,17 +13,17 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
+
     private String title;
 
     private String description;
 
-    @NonNull
+
     private Boolean completed;
 
     //Constructor
 
-    public Todo(Long id, @NonNull String title, String description, @NonNull Boolean completed) {
+    public Todo(Long id, String title, String description, Boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -43,12 +43,11 @@ public class Todo {
         this.id = id;
     }
 
-    @NonNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(@NonNull String title) {
+    public void setTitle( String title) {
         this.title = title;
     }
 
@@ -60,12 +59,12 @@ public class Todo {
         this.description = description;
     }
 
-    @NonNull
+
     public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(@NonNull Boolean completed) {
+    public void setCompleted( Boolean completed) {
         this.completed = completed;
     }
 
