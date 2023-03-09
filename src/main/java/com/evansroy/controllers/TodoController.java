@@ -20,7 +20,7 @@ public class TodoController {
         return service.getAllTodos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Todo getTodoById(@PathVariable Long id) {
         return service.getTodoById(id);
     }
@@ -30,12 +30,12 @@ public class TodoController {
         return service.createTodo(todo);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public Todo updateTodoById(@PathVariable Long id, @RequestBody Todo updatedTodo) {
         return service.updateTodoById(id, updatedTodo);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void deleteTodoById(@PathVariable Long id) {
         service.deleteTodoById(id);
     }
